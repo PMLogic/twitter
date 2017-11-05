@@ -4,16 +4,17 @@
 
     $link = mysqli_connect("127.0.0.1", "root", "", "twitter");
 
-if (mysqli_connect_error()) {
-    
-    print_r(mysqli_connect_error());
-    exit();
-}
+    if (mysqli_connect_error()) {
 
-if (isset($_GET['function']) == "logout") {
-    
-    session_unset();
-}
+        print_r(mysqli_connect_error());
+        exit();
+    }
+
+    if (isset($_GET['function']) == "logout") {
+
+        session_unset();
+    }
+
 function time_since($since) {
     $chunks = array(
         array(60 * 60 * 24 * 365 , 'year'),
@@ -68,12 +69,32 @@ function displayTweets($type) {
             
                 echo "<p>Follow</p></div>";
         }
-    }
-        
+    }        
         
 }
 
+function displaySearch() {
+    
+    echo '<div class="form-inline">
+    <div class="form-group">
+  <input type="text" class="form-control" id="search" placeholder="Search">
+  </div>
+  <button class="btn btn-primary">Search Tweets</button>
+</div>';
+}
 
+function displayTweetBox() {
+    
+    if (isset($_SESSION['id']) > 0) {
+        
+        echo '<div class="form">
+    <div class="form-group">
+  <textarea class="form-control" id="tweetContent"></textarea>
+  </div>
+  <button class="btn btn-primary">Post Tweet</button>
+</div>';
+    }
+}
 
 
 
